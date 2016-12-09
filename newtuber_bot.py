@@ -1,28 +1,16 @@
 #!/usr/bin/env python
-
 import os
 import sys
-import logging
-import argparse
 import simplejson
-import yaml
 import praw
-import random
-import json
 import OAuth2Util
-
 from re import sub
 from datetime import datetime, timedelta
 from praw.errors import (InvalidUser, InvalidUserPass, RateLimitExceeded,
                         HTTPException, OAuthAppRequired)
 from praw.objects import Comment, Submission
 
-
 USER_AGENT = "newtuber/1.0"
-CLIENT_ID = os.environ.get('NTB_REDDIT_CLIENT_ID')
-CLIENT_SECRET = os.environ.get('NTB_REDDIT_CLIENT_SECRET')
-USERNAME = os.environ.get('NTB_REDDIT_CLIENT_SECRET')
-PASSWORD = os.environ.get('NTB_REDDIT_CLIENT_SECRET')
 
 r = praw.Reddit( user_agent= USER_AGENT )
 o = OAuth2Util.OAuth2Util(r)
