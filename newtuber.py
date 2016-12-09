@@ -27,7 +27,7 @@ config_file = './newtuber.json'
 with open(config_file, 'r') as f:
   ignore = simplejson.load(f);
 
-for submission in r.get_subreddit('newtubers').get_new(limit=25):
+for submission in r.get_subreddit('newtubers').get_new(limit=10):
   if submission.link_flair_text == "GIVE CONTENT CRITIQUE" : 
     if submission.id in ignore:
       pass
