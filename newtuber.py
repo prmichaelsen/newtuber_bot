@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 import os
 import sys
 import logging
@@ -20,6 +19,7 @@ from praw.errors import (InvalidUser, InvalidUserPass, RateLimitExceeded,
                         HTTPException, OAuthAppRequired)
 from praw.objects import Comment, Submission
 
+logging.basicConfig(format='%(asctime)s %(message)s',stream=sys.stdout,level=logging.INFO)
 
 r = praw.Reddit(user_agent="newtuber/1.0")
 
@@ -27,11 +27,15 @@ config_file = './newtuber.json'
 with open(config_file, 'r') as f:
   ignore = simplejson.load(f);
 
-for submission in r.get_subreddit('newtubers').get_new(limit=10):
+print(os.environ.get('SENDGRID_API_KEY'))
+print('here');
+logging.info('Running')
+for submission in r.get_subreddit('newtubers').get_new(limit=5):
   if submission.link_flair_text == "GIVE CONTENT CRITIQUE" : 
     if submission.id in ignore:
       pass
     else:
+      logging.info("New submission: %s" % submission.id)
       ignore[submission.id] = submission.id;
       sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
       from_email = Email('michaelsenpatrick@gmail.com')
