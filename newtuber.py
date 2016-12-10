@@ -42,7 +42,7 @@ for submission in r.get_subreddit('newtubers').get_new(limit=5):
       to_email = Email('michaelsenpatrick@gmail.com')
       body = "New GIVE CONTENT CRITIQUE: <a href="+submission.url+">"+submission.title+"</a>"
       content = Content('text/html',body)
-      subject = "New GIVE CONTENT CRITIQUE submission"
+      subject = "New GIVE CONTENT CRITIQUE submission"+submission.title
       mail = Mail(from_email, subject, to_email, content)
       resp = sg.client.mail.send.post(request_body=mail.get())
       print(resp.status_code)
