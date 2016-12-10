@@ -31,6 +31,7 @@ for submission in r.get_subreddit('newtubers').get_new(limit=5):
         success = submission.add_comment(body)
         if success:
           ignore[submission.id] = submission.id;
+          print('Successfully posted to %s' % submission.id)
       except RateLimitExceeded:
         print('Rate limit exceeded, could not post to submission id: %s' % submission.id)
       pass
